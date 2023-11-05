@@ -9,14 +9,41 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,400;0,500;1,300&display=swap" rel="stylesheet">
-
+    
 </head>
 <body>
-    <div class="container-fluid" style="border: 1px solid red;">
+    <div class="container-fluid" style="border: 1px solid red; display: flex;justify-content: space-between;">
         <h1>
             Shopping <small class="text-body-secondary">Cart</small>
         </h1>
+
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+                <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <a class="nav-link" href="#"><ion-icon name="cart-outline"></ion-icon></a>
+                  </li>
+                </ul>
+            </div>
+        </nav>
     </div>
-   
+
+    <div class="container-fluid">
+        <div class="container">
+
+        </div>
+    </div>
+   <script src="script.js" type="module"></script>
+   <!-- <script type="module">
+    import fetch_ProductData from './script.js';
+    console.log("success");
+    // console.log(fetch_ProductData())
+    var data = await fetch_ProductData();
+    console.log(data.products.map((e)=>{
+        console.log(e.images[0])
+    }))
+</script> -->
+   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
 </html>
