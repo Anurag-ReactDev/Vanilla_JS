@@ -4,3 +4,16 @@ h2{
     font-weight: light;
     font-style: italic;
 }
+
+.card{
+    margin: 1rem;
+}
+
+#no_of_items:hover{
+    background: burlywood;
+    font-size: 2rem;
+}
+
+img{
+    max-width: 200px;
+}
