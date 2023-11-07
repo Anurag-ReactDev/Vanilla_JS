@@ -32,96 +32,101 @@
         </nav>
     </div>
 
+    <div class="totalBill">
+    
+    </div>
+
+    
+    <div class="no-cartItems">
+    
+    </div>
+
+
     <div class="container-fluid">
         <div class="product-cards">
 
         </div>
     </div>
-    <h1 class="totalBill">
-    
-    </h1>
    
-   <!-- <script type="module">
-    import fetch_ProductData from './script.js';
-    console.log("success");
-    // console.log(fetch_ProductData())
-    var data = await fetch_ProductData();
-    console.log(data.products.map((e)=>{
-        console.log(e.images[0])
-    }))
-</script> -->
-   <!-- <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script> -->
+   
+  
     <script type="module">
         // import {cartList} from "./script.js";
+        //get cart data from localStorage
         const mydata = JSON.parse(localStorage.getItem('cartAddedItems'));
         console.log(mydata)
-// console.log("Working")
 
-// var fetch_ProductData = async ()=>{
-//     var products = await fetch('https://dummyjson.com/products');
-//     var products_json = await products.json();
-//     return products_json;
-//     // var product_data = products_json;
-//     // return product_data;
-// }
-
-// var data = await fetch_ProductData();//since the async function always returns promise
-// var productData = data.products;
-
-// var cart = document.getElementById("no_of_items")
 
 let productDom = document.getElementsByClassName('product-cards')
 
+var totalDiv = document.getElementsByClassName('totalBill')
+var showTotal = document.createElement("h2")
+totalDiv[0].setAttribute("style","margin-top:2rem")
+totalDiv[0].setAttribute("style","margin-left:87%")
+totalDiv[0].appendChild(showTotal)
+
+
+
+
 var total = 0;
 
-for(let i=0;i<mydata.length;i++){
-    total = total + mydata[i].price;
+
+
+if(!mydata){
+    let message = document.getElementsByClassName('no-cartItems')
+    let nill_cart_items_message = document.createElement("h2")
+    message[0].appendChild(nill_cart_items_message);
+    nill_cart_items_message.textContent = "No items in the cart"
 }
+else{
+    for( let i=0;i<mydata.length;i++){
 
-for( let i=0;i<mydata.length;i++){
+        console.log("From" + mydata.length)
 
-    console.log("From" + mydata.length)
+        let card_outline = document.createElement('div')
+        card_outline.setAttribute("class","card")
 
-    let card_outline = document.createElement('div')
-    card_outline.setAttribute("class","card")
+        let image = document.createElement('img')
+        image.setAttribute("src",mydata[i].images[0])
+        image.setAttribute("alt",mydata[i].brand)
+        image.setAttribute("class","card-img-top")
 
-    let image = document.createElement('img')
-    image.setAttribute("src",mydata[i].images[0])
-    image.setAttribute("alt",mydata[i].brand)
-    image.setAttribute("class","card-img-top")
+        let card_body = document.createElement('div')
+        card_body.setAttribute("class","card-body");
 
-    let card_body = document.createElement('div')
-    card_body.setAttribute("class","card-body");
+        let heading = document.createElement('h5')
+        heading.setAttribute("class","card-title");
+        heading.textContent = mydata[i].title;
 
-    let heading = document.createElement('h5')
-    heading.setAttribute("class","card-title");
-    heading.textContent = mydata[i].title;
+        let subtitle = document.createElement('p')
+        subtitle.setAttribute("class","card-text");
+        subtitle.textContent = mydata[i].description;
 
-    let subtitle = document.createElement('p')
-    subtitle.setAttribute("class","card-text");
-    subtitle.textContent = mydata[i].description;
+       
+        productDom[0].appendChild(card_outline)
+        
+        card_outline.append(image)
+        card_outline.append(card_body)
+        // card_body.append(heading,subtitle,button)
+        card_body.append(heading,subtitle)
+    }
 
-    // let button = document.createElement('a')
-    // button.setAttribute("class","btn btn-primary")
-    // button.textContent="Add to cart";
-    // button.onclick= function (){
-    //     console.log("clicked")
-    //     cartList.push(cartList[i])
-    //     // console.log(productData[i].id)
-    //     cart.textContent = cartList.length;
-    //     cart.setAttribute("style","background:yellow")
-    // }
+    //checkout button
+    let button = document.createElement('a')
+    productDom[0].appendChild(button)
+    button.setAttribute("class","btn btn-primary")
+    button.textContent = "checkout"
+    button.onclick = function(){
+        alert("Checked out successfully")
+        window.location.href= "index.html"
+        localStorage.clear(); //redirected to homepage
+    }
 
-    productDom[0].appendChild(card_outline)
-    card_outline.append(image)
-    card_outline.append(card_body)
-    // card_body.append(heading,subtitle,button)
-    card_body.append(heading,subtitle)
+    for(let i=0;i<mydata.length;i++){ //calculate total price
+        total = total + mydata[i].price;
+    }
+    showTotal.textContent = "CartTotal:$ " + total;
 }
-
-var totalshow = document.getElementsByClassName('totalBill')
- totalshow.textContent = total
     </script>
 
 
