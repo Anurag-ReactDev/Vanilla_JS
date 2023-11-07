@@ -17,42 +17,45 @@ var cartList = [];
 for( let i=0;i<productData.length;i++){
 
 
-let card_outline = document.createElement('div')
-card_outline.setAttribute("class","card")
+    let card_outline = document.createElement('div')
+    card_outline.setAttribute("class","card")
 
-let image = document.createElement('img')
-image.setAttribute("src",productData[i].images[0])
-image.setAttribute("alt",productData[i].brand)
-image.setAttribute("class","card-img-top")
+    let image = document.createElement('img')
+    image.setAttribute("src",productData[i].images[0])
+    image.setAttribute("alt",productData[i].brand)
+    image.setAttribute("class","card-img-top")
 
-let card_body = document.createElement('div')
-card_body.setAttribute("class","card-body");
+    let card_body = document.createElement('div')
+    card_body.setAttribute("class","card-body");
 
-let heading = document.createElement('h5')
-heading.setAttribute("class","card-title");
-heading.textContent = productData[i].title;
+    let heading = document.createElement('h5')
+    heading.setAttribute("class","card-title");
+    heading.textContent = productData[i].title;
 
-let subtitle = document.createElement('p')
-subtitle.setAttribute("class","card-text");
-subtitle.textContent = productData[i].description;
+    let subtitle = document.createElement('p')
+    subtitle.setAttribute("class","card-text");
+    subtitle.textContent = productData[i].description;
 
-let button = document.createElement('a')
-button.setAttribute("class","btn btn-primary")
-button.textContent="Add to cart";
-button.onclick= function (e){
-    console.log("clicked")
-    cartList.push(e.id)
-    cart.textContent = cartList.length;
-    cart.setAttribute("style","background:yellow")
+    let button = document.createElement('a')
+    button.setAttribute("class","btn btn-primary")
+    button.textContent="Add to cart";
+    button.onclick= function (){
+        console.log("clicked")
+        cartList.push(productData[i])
+        localStorage.setItem('cartAddedItems',JSON.stringify(cartList))
+        // console.log(productData[i].id)
+        cart.textContent = cartList.length;
+        cart.setAttribute("style","background:yellow")
+    }
+
+    productDom[0].appendChild(card_outline)
+    card_outline.append(image)
+    card_outline.append(card_body)
+    card_body.append(heading,subtitle,button)
 }
 
-productDom[0].appendChild(card_outline)
-card_outline.append(image)
-card_outline.append(card_body)
-card_body.append(heading,subtitle,button)
-}
 
 
-
+// export default cartList;
 
 // export default fetch_ProductData;
